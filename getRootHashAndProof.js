@@ -9,4 +9,11 @@ const rootHash = merkleTree.getRoot().toString('hex');
 // Note, you should only include the FINAL root hash in your Solidity smart contract
 // after no further changes need to be made to the `addresses.json` file.
 
-console.log(`Root Hash: 0x${rootHash}`);
+console.log(`Root Hash: 0x${rootHash}\n`);
+
+addresses.forEach((address)=>{
+    const hashedAddress = keccak256(address);
+    const proof = merkleTree.getHexProof(hashedAddress);
+    const proofStr = JSON.stringify(proof)
+    console.log(`Proof For: 0x${address} is as below:\n${proofStr}\n`)
+})
